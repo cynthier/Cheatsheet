@@ -2,6 +2,14 @@
 
 ################################
 ################################ GO profile cluster 
+library(org.Mm.eg.db)
+library(clusterProfiler)
+library(openxlsx)
+library(dplyr)
+library(GO.db)
+library(AnnotationDbi) 
+
+source("https://raw.githubusercontent.com/cynthier/Functions/main/my_functions.R")
 result <- compareCluster(
     geneCluster = genes,
     fun = "enrichGO",
@@ -18,16 +26,18 @@ terms <- c("mitotic cell cycle phase transition", "chromosome segregation", "reg
 
 go <- result@compareClusterResult %>% filter(Description %in% terms)
 
-library(ggplot2)
+
 options(repr.plot.width = 6, repr.plot.height = 4.5) 
-source("/home//cheatsheet/Functions.r")
 p1 <- dotplt.enriched(data = go, 
                       title = "target genes of Ezh2 \n (Top pathways)",  
                       size = "Count", 
                       x = "Cluster") & ylab(NULL)
 p1
 
-
+wb <- createWorkbook()
+addWorksheet(wb = wb, sheetName = name)
+writeData(wb = wb, sheet = name, x = go_result)
+saveWorkbook(wb, "./GO_results.xlsx", overwrite = TRUE)
 
 ################################# get pathway genes accroding to the GO ID
 #################################
