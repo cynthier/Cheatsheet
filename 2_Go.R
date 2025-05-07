@@ -34,10 +34,17 @@ p1 <- dotplt.enriched(data = go,
                       x = "Cluster") & ylab(NULL)
 p1
 
+
 wb <- createWorkbook()
-addWorksheet(wb = wb, sheetName = name)
-writeData(wb = wb, sheet = name, x = go_result)
-saveWorkbook(wb, "./GO_results.xlsx", overwrite = TRUE)
+for(name in unique(all.result$Cluster)){ 
+    go_result <- subset(all.result, Cluster == name)
+    addWorksheet(wb, sheetName = name)
+    temp <- go_result[go_result$Cluster == name,] %>% arrange(desc(Count))
+    writeData(wb, sheet =  name, x = temp)
+}
+
+saveRDS(all.result, file = "GO_results.rds")
+saveWorkbook(wb = wb, file = "GO_results.xlsx", overwrite = T)
 
 ################################# get pathway genes accroding to the GO ID
 #################################
