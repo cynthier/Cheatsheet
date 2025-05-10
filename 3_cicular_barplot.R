@@ -12,17 +12,16 @@ plot.data$name <- factor(plot.data$name, levels = c("E13.5_BP",
                                                     "E15.5_Neuroblast", 
                                                     "E13.5_BranchA", 
                                                     "E15.5_BranchA"))
-wid.bar <- 0.5
-plot.data$width <- wid.bar
 
 ######## add the empty bar and label data
-# empty_bar <- 1
-# to_add <- data.frame(matrix(NA, empty_bar * nlevels(as.factor(results$name)), ncol(results)))
-# colnames(to_add) <- colnames(results)
-# to_add$name <- rep(levels(as.factor(results$name)), each = empty_bar)
-# to_add$width <- wid.bar/5 
+empty_bar <- 1
+to_add <- data.frame(matrix(NA, empty_bar * nlevels(as.factor(results$name)), ncol(results)))
+colnames(to_add) <- colnames(results)
+to_add$name <- rep(levels(as.factor(results$name)), each = empty_bar)
+to_add$width <- wid.bar/5 
 
 # data <- rbind(plot.data, to_add)
+data <- plot.data
 data <- data %>% arrange(name)
 data$id <- seq(1, nrow(data))
 
@@ -147,3 +146,7 @@ p <- ggplot() +
 
 options(repr.plot.width = 14, repr.plot.height = 12)
 p
+
+pdf(".//pathwayscore/1_CicularP_Top2disrupted_paths.pdf", height = 12, width = 14)
+print(p) 
+dev.off()
