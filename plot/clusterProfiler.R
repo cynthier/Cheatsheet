@@ -1,6 +1,6 @@
 
 
-################################
+
 ################################ GO profile cluster 
 library(org.Mm.eg.db)
 library(clusterProfiler)
@@ -20,10 +20,8 @@ result <- compareCluster(
     qvalueCutoff = 0.05,
     readable = TRUE) 
 
-go1 <- result@compareClusterResult %>% filter(Cluster == "E13.5_BranchA") %>% arrange(desc(Count))
-go2 <- result@compareClusterResult %>% filter(Cluster == "E13.5_BranchA") %>% arrange(desc(Count)) 
+go1 <- result@compareClusterResult %>% filter(Cluster == "xx") %>% arrange(desc(Count))
 terms <- c("mitotic cell cycle phase transition", "chromosome segregation", "regulation of cell cycle phase transition", "nuclear division", "DNA replication")
-
 go <- result@compareClusterResult %>% filter(Description %in% terms)
 
 
@@ -46,9 +44,46 @@ for(name in unique(all.result$Cluster)){
 saveRDS(all.result, file = "GO_results.rds")
 saveWorkbook(wb = wb, file = "GO_results.xlsx", overwrite = T)
 
-################################# get pathway genes accroding to the GO ID
-#################################
 
+################################ KEGG cluster profiler
+for(name in names(genes)){ 
+    genes[[name]] <- AnnotationDbi::select(org.Mm.eg.db, 
+                                           keys = genes[[name]], 
+                                           columns = c("SYMBOL", "GENENAME", "ENTREZID"), 
+                                           keytype = "SYMBOL")$ENTREZID %>% na.omit()
+
+}
+
+result <- compareCluster(
+            geneCluster = genes,
+            fun = "enrichKEGG",
+            organism = "mmu",
+            # keyType = "ENTREZID",
+            pvalueCutoff = 0.05,
+            qvalueCutoff = 0.05) 
+
+result <- setReadable(result, OrgDb = org.Mm.eg.db, keyType = "ENTREZID")
+all.result <- result@compareClusterResult
+plot.data <- all.result %>% 
+    group_by(Cluster) %>% 
+    filter(p.adjust < 0.01) %>% 
+    arrange(desc(Count)) %>% 
+    slice_max(order_by = Count, n = 10)
+
+
+wb <- createWorkbook()
+for(name in unique(all.result$Cluster)){ 
+    go_result <- subset(all.result, Cluster == name)
+    addWorksheet(wb, sheetName = name)
+    temp <- go_result[go_result$Cluster == name,] %>% arrange(desc(Count))
+    writeData(wb, sheet =  name, x = temp)
+}
+
+saveRDS(all.result, file = "KEGG_results.rds")
+saveWorkbook(wb = wb, file = "KEGG_results.xlsx", overwrite = T)
+
+
+################################# get pathway genes accroding to the GO ID
 library(org.Mm.eg.db)
 library(openxlsx)
 library(dplyr)
