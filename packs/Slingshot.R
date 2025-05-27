@@ -39,7 +39,6 @@ FeaturePlot(obj, features = c("Sox10", "Ube2c", "Tubb3", "Cartpt"),reduction = "
 
 
 #### density plot for the pseudotime
-
 options(repr.plot.width = 6, repr.plot.height = 6)
 ggplot(meta, aes(x = pseudotime, fill = group)) + 
   geom_density(alpha = 0.3) + 
