@@ -5,11 +5,14 @@ colors <- c(
     "E13.5_ref" = "gray",
     
     "Control" = "#04a29d", 
-    "Vcl cKO" = "#b2012e", 
+    "cKO" = "#b2012e", 
+    "Control" = "#04a29d", # 蓝
+    "Vcl cKO" = "#b2012e", #红
     
     "BP" = "#6b853e",
     "Neuroblast" = "#fdcee6",  
     "BranchA" = "#bca9f5", 
+
     
     "E13.5_Neuroblast" = "#E41A1C",  
     "E15.5_Neuroblast" = "#FFED6F",  
