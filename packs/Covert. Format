@@ -1,0 +1,5 @@
+library(loomR)
+library(SeuratDisk)
+
+data <- Connect("/home/rawdata/Public/scRNA//GSM4504449_E18_10X_18_065.loom", mode = "r") 
+data.ser <- as.Seurat(data)
