@@ -115,3 +115,31 @@ for(name in paste0(datalist$stage, "_", datalist$celltype)){
 
 stopImplicitCluster()
 saveRDS(path_genes, file = "all_Top100_pathway_genes.rds")
+
+####################### pathway score
+library(org.Hs.eg.db, lib.loc = "/home//conda/pkgs/jupyterlab/lib/R/library/")
+# library(org.Mm.eg.db)
+library(GO.db)
+library(dplyr)
+library(AnnotationDbi)
+
+go_terms <- Term(GOTERM)
+idx <- grep("axonogenesis", go_terms, ignore.case = TRUE,fixed = T)
+terms <- go_terms[idx]; length(terms)
+res <- as.data.frame(terms);head(res)
+# res <- subset(res, terms %in% c(grep(res$terms, pattern = "histone", value = T), 
+#                                grep(res$terms, pattern = "protein", value = T)))
+
+######### get the gene
+id <- "GO:0016575"
+genes <- list()
+for(id in rownames(res)){ 
+    gene <- AnnotationDbi::select(org.Hs.eg.db, 
+                               keys = id, 
+                               columns = c("ENTREZID", "SYMBOL"), 
+                               keytype = "GO") %>% pull(SYMBOL) %>% unique()
+    term <- res[id, ]
+    genes[[term]] <- gene
+}
+
+saveRDS(genes, "temp.neurogenesis.genes.rds")
