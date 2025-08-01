@@ -1,3 +1,6 @@
+################ Heatmap color
+c("#377EB8", "white", "#E41A1C")
+
 
 colors <- c(
     "E13.5" = "#a9d0f5", 
@@ -20,4 +23,6 @@ colors <- c(
     "E15.5_BranchA" = "#F5A9D0",
     "E13.5_BP" = "#819ff7",
     "E15.5_BP" = "#FAAC58"
+
+    
    )
