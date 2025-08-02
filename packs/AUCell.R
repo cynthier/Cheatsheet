@@ -35,3 +35,44 @@ for(i in 1:nrow(datalist)){
      
 }
 dev.off()
+
+
+###############################################
+
+library(Seurat)
+library(AUCell)
+library(ggplot2)
+library(ggpubr)
+colors <- readRDS("/home/lfliuhku/cheatsheet/colors.rds")
+
+count.mat <- GetAssayData(object = obj, slot = "counts", assay = "RNA")
+meta <- obj@meta.data
+i <- names(genes)
+
+pdf( "pathway_score.pdf", height = 4, width = 12)
+options(repr.plot.width = 12, repr.plot.height = 4)
+for(i in names(genes)){ 
+
+    cells.rankings <- AUCell_buildRankings(count.mat, plotStats = FALSE)
+    cells_AUC <- AUCell_calcAUC(list("geneset" = genes[[i]]), cells.rankings)
+    auc.mat <- getAUC(cells_AUC)
+    meta[, i] <- auc.mat[1,rownames(meta), drop = T]
+    
+    comparison <- list(c("Control", "Mutant"))
+    meta$group <- factor(meta$group, levels = c("Control", "Mutant"))
+    p <- ggplot(meta, aes(x = group, y = .data[[i]], color = group)) + 
+        geom_violin() + 
+        stat_summary(fun = "mean", geom = "crossbar", width = 0.3, size = 0.5, aes(color = group))+ 
+        facet_grid(.~subcluster) + 
+        scale_color_manual(values = colors) +
+        stat_compare_means(method = "wilcox.test", size = 3) +
+        theme_bw(base_size = 14) + 
+        theme(plot.title = element_text(hjust = 0.5), 
+              legend.position = "right", 
+              axis.text.x = element_blank()) + 
+        ggtitle(pathinfo[i, "name"]) + labs(x = NULL, y = "Pathway score")
+    print(p)  
+}
+dev.off()
+
+
