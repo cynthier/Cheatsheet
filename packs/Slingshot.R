@@ -39,10 +39,39 @@ FeaturePlot(obj, features = c("Sox10", "Ube2c", "Tubb3", "Cartpt"),reduction = "
 
 
 #### density plot for the pseudotime
-options(repr.plot.width = 6, repr.plot.height = 6)
-ggplot(meta, aes(x = pseudotime, fill = group)) + 
-  geom_density(alpha = 0.3) + 
-  scale_fill_manual(values = colors) + 
-  facet_grid(stage~.) & theme_bw() & 
-  theme(axis.text = element_text(size = 14), 
-        axis.title = element_text(size = 14))
+my_density.plt <- function(meta, 
+                           x.var = "pseudotime", 
+                           fill.var = "time", 
+                           color.var = "time", 
+                           colors = colors, 
+                           alpha = 0.5, 
+                           legend.pos = "right", 
+                           facet.var = "time",
+                           facet = TRUE){ 
+   library(ggplot2)
+   if(facet){ 
+       p <- ggplot(meta, aes(x = .data[[x.var]], fill = .data[[fill.var]], color = .data[[color.var]])) + 
+        geom_density(alpha = alpha) + 
+        scale_fill_manual(values = colors) & 
+        scale_color_manual(values = colors) & 
+        theme_bw() & 
+        facet_grid(.data[[facet.var]]~.) &
+        theme(axis.text = element_text(size = 8),  
+              axis.title = element_text(size = 12), 
+              strip.text = element_text(size = 8), 
+             legend.position = legend.pos) 
+        return(p) 
+   
+   }else{ 
+          p <- ggplot(meta, aes(x = .data[[x.var]], fill = .data[[fill.var]], color = .data[[color.var]])) + 
+        geom_density(alpha = alpha) + 
+        scale_fill_manual(values = colors) & 
+        scale_color_manual(values = colors) & 
+        theme_bw() & 
+        theme(axis.text = element_text(size = 8),  
+              axis.title = element_text(size = 12), 
+              strip.text = element_text(size = 8), 
+             legend.position = legend.pos) 
+        return(p) 
+   }
+}
