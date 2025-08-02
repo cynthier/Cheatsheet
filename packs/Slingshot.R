@@ -33,9 +33,31 @@ p <- ggplot(meta, aes(x = PC_1, y = PC_3, color = pseudotime)) +
     xlab("PC_1") &  ylab("PC_3"); print(p)
 
 #### plot marker expression
-options(repr.plot.width = 10, repr.plot.height = 8)
-dims <- c(1,3)
-FeaturePlot(obj, features = c("Sox10", "Ube2c", "Tubb3", "Cartpt"),reduction = "pca", dims = dims, pt.size = 0.001, order = T, ncol = 2)
+genes <- c("SOX10", "MKI67", "SOX2","TUBB3", "MAP2", "ELAVL4")
+
+genes <- intersect(genes, rownames(sce))
+pca_data <- meta[,c("PC1", "PC2")]
+
+gene_data <- logcounts(sce)[genes,] %>% 
+  t() %>% 
+  as.data.frame() %>% 
+  bind_cols(pca_data)
+
+gene_data_long <- gene_data %>% 
+  tidyr::pivot_longer(cols = genes, 
+                      names_to = "Gene", 
+                      values_to = "Expression") %>% 
+  arrange(Gene, Expression)
+
+gene_data_long$Gene <- factor(gene_data_long$Gene, levels = genes)
+
+options(repr.plot.width = 3*4, repr.plot.height = round(length(genes)/4)*4) 
+ggplot(gene_data_long, aes(x = PC1, y = PC2, color = Expression)) +
+  geom_point(size = 1) +
+  facet_wrap(~ Gene, ncol = 3) + 
+  scale_color_gradientn(colors = c(colorRampPalette(c("#5b51a3","#79c9a4","#f2faac","#fdb465","#a4104d"))(90))) + 
+  theme_linedraw(base_size = 14) + 
+    theme(strip.text = element_text(size = 16, face = "bold.italic"))
 
 
 #### density plot for the pseudotime
