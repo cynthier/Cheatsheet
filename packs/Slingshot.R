@@ -75,3 +75,17 @@ my_density.plt <- function(meta,
         return(p) 
    }
 }
+
+
+colors <- readRDS("/home//cheatsheet/colors.rds")
+options(repr.plot.width = 6, repr.plot.height = 4)
+meta$time <- factor(meta$time, levels = c('Day9','Day20'))
+my_density.plt(meta, 
+               x.var = "pseudotime", 
+               fill.var = "time", 
+               color.var = "time", 
+               colors = colors,
+               facet.var = "time",
+               alpha = 0.8,
+               legend.pos = "none", 
+               facet = TRUE)
