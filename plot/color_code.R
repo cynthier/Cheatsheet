@@ -1,6 +1,6 @@
 ################ Heatmap color
 c("#377EB8", "white", "#E41A1C")
-
+c(colorRampPalette(c("#5b51a3","#79c9a4","#f2faac","#fdb465","#a4104d"))(90))
 
 colors <- c(
     "E13.5" = "#a9d0f5", 
