@@ -1,7 +1,7 @@
 
 getcolors <- function(){ 
 
-    colors <- c(
+    colors = c(
     "transient stage" = "#ceecf5",
     "committed stage" = "#68b8d0",
     
