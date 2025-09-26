@@ -53,7 +53,7 @@ getcolors <- function(){
   "10" = "#17BECF", # Cyan
   "11" = "#FFBB78", # Light Orange
   "12" = "#98DF8A", # Light Green
-  "13" = "#FF9896"  # Light Red 
+  "13" = "#FF9896",  # Light Red 
 
     "BP" = "#6b853e", 
     "BPearly" = "#94c243", 
