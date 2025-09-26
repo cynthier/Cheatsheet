@@ -2,6 +2,9 @@
 getcolors <- function(){ 
 
     colors = c(
+    "Doublet" = "#BE81F7",
+    "Singlet" = "#aaaaaa",
+        
     "transient stage" = "#ceecf5",
     "committed stage" = "#68b8d0",
     
