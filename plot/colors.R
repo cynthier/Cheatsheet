@@ -41,19 +41,19 @@ getcolors <- function(){
     "IMR_N_Diff_D40" = "#F5A9A9", 
     "IMR_iPSC" = "#00FF80", 
 
-  "1" = "#1F77B4",  # Blue
-  "2" = "#FF7F0E",  # Orange
-  "3" = "#2CA02C",  # Green
-  "4" = "#D62728",  # Red
-  "5" = "#9467BD",  # Purple
-  "6" = "#8C564B",  # Brown
-  "7" = "#E377C2",  # Pink
-  "8" = "#7F7F7F",  # Gray
-  "9" = "#BCBD22",  # Olive
-  "10" = "#17BECF", # Cyan
-  "11" = "#FFBB78", # Light Orange
-  "12" = "#98DF8A", # Light Green
-  "13" = "#FF9896",  # Light Red 
+      "1" = "#1F77B4",  # Blue
+      "2" = "#FF7F0E",  # Orange
+      "3" = "#2CA02C",  # Green
+      "4" = "#D62728",  # Red
+      "5" = "#9467BD",  # Purple
+      "6" = "#8C564B",  # Brown
+      "7" = "#E377C2",  # Pink
+      "8" = "#7F7F7F",  # Gray
+      "9" = "#BCBD22",  # Olive
+      "10" = "#17BECF", # Cyan
+      "11" = "#FFBB78", # Light Orange
+      "12" = "#98DF8A", # Light Green
+      "13" = "#FF9896",  
         
     "BP" = "#6b853e", 
     "BPearly" = "#94c243", 
