@@ -40,7 +40,8 @@ getcolors <- function(){
     "IMR_N_Diff_D20" = "#9A2EFE", 
     "IMR_N_Diff_D40" = "#F5A9A9", 
     "IMR_iPSC" = "#00FF80", 
-
+        
+     "0" = "#8ea9f8",  # Blue
       "1" = "#1F77B4",  # Blue
       "2" = "#FF7F0E",  # Orange
       "3" = "#2CA02C",  # Green
