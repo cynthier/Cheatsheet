@@ -80,7 +80,7 @@ getcolors <- function(){
     "GPlate" = "#FFDE59",
     "NPearly" = "#fdcee6", 
     "NPlate" = "#ff2f9a", 
-    "ENMFB" = "#d9d9d9"
+    "ENMFB" = "#d9d9d9",
    "Neuroblast" = "#fdcee6",
     "Branch A" = "#bca9f5", 
     "Neuroblast" = "#E41A1C",   
