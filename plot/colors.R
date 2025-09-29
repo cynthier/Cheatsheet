@@ -81,6 +81,12 @@ getcolors <- function(){
     "NPearly" = "#fdcee6", 
     "NPlate" = "#ff2f9a", 
     "ENMFB" = "#d9d9d9"
+   "Neuroblast" = "#fdcee6",
+    "Branch A" = "#bca9f5", 
+    "Neuroblast" = "#E41A1C",   
+    "Branch B" = "#f180ba",
+    "GPearly" = "#D7DF01",
+    "GPlate" = "#fbb469"
     )
     return(colors)
 }
