@@ -12,8 +12,8 @@ getcolors <- function(){
     "Vcl cKO"="#f82401", 
     "Control" = "#0f7dbd",
         
-    "hENCC" = "#385450", 
-    "Day9" = "#769eaa", 
+    "hENCC" = "#ace9fb", 
+    "Day9" = "#57a6bd", 
     "Day20" = "#476d78",
     
     "Vagal NCC" = "#385450",
