@@ -55,6 +55,23 @@ getcolors <- function(){
       "11" = "#FFBB78", # Light Orange
       "12" = "#98DF8A", # Light Green
       "13" = "#FF9896",  
+
+        
+     "C0" = "#8ea9f8",  # Blue
+      "C1" = "#1F77B4",  # Blue
+      "C2" = "#FF7F0E",  # Orange
+      "C3" = "#2CA02C",  # Green
+      "C4" = "#D62728",  # Red
+      "C5" = "#9467BD",  # Purple
+      "C6" = "#8C564B",  # Brown
+      "C7" = "#E377C2",  # Pink
+      "C8" = "#7F7F7F",  # Gray
+      "C9" = "#BCBD22",  # Olive
+      "C10" = "#17BECF", # Cyan
+      "C11" = "#FFBB78", # Light Orange
+      "C12" = "#98DF8A", # Light Green
+      "C13" = "#FF9896",  
+        
         
     "BP" = "#6b853e", 
     "BPearly" = "#94c243", 
