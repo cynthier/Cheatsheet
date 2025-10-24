@@ -71,8 +71,29 @@ getcolors <- function(){
       "C11" = "#FFBB78", # Light Orange
       "C12" = "#98DF8A", # Light Green
       "C13" = "#FF9896",  
-        
-        
+
+    "cycling neuronal progenitor 1"='#1f77b4',
+    "cycling neuronal progenitor 2"='#aec7e8',
+    
+    "neuronal progenitor 1"='#ff7f0e', 
+    "neuronal progenitor 2"='#FFDE59',
+    "neuronal progenitor 4"='#a0a156',
+    "neuronal progenitor 3"='#e1b829',
+    
+     "neuroblast 3"="#98df8a",
+    "neuroblast 1"='#34634c',
+    "neuroblast 2"="#3e9621",
+
+    "ENC (SST+)"='#ff9896',
+    "IPAN/IN"='#8c564b',
+    "IN?"='#c49c94',
+    "ENC (GAD2+)"='#e377c2',
+    # "ENC (PHOX2B+_KCNJ6+)"='#f7b6d2',
+    "ENC (PHOX2B+_KCNJ6+)"='#D20103',
+    # "ENC (TH+_PHOX2B+)"='#7f7f7f',
+    # "ENC (TH+_PHOX2B+)"='#060270',
+    "ENC (NOVA1_high)"='#c7c7c7'，
+    
     "BP" = "#6b853e", 
     "BPearly" = "#94c243", 
     "BPlate" = "#607838", 
