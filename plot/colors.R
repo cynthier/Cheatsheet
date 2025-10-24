@@ -92,7 +92,7 @@ getcolors <- function(){
     "ENC (PHOX2B+_KCNJ6+)"='#D20103',
     # "ENC (TH+_PHOX2B+)"='#7f7f7f',
     # "ENC (TH+_PHOX2B+)"='#060270',
-    "ENC (NOVA1_high)"='#c7c7c7'，
+    "ENC (NOVA1_high)"='#c7c7c7',
     
     "BP" = "#6b853e", 
     "BPearly" = "#94c243", 
