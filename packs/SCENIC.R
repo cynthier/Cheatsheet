@@ -14,32 +14,6 @@ loom <- SCopeLoomR::build_loom(
     dgem = exprMat_filtered,
     default.embedding = NULL  
 )
-############################## read the results 
-split_genes <- function(target){ 
-    genes <- regmatches(target, gregexpr("(?<=')[A-Z0-9\\-]+(?:_[A-Z0-9]+)?(?=')", target, perl = TRUE))[[1]]
-    values  <- as.numeric(regmatches(target, gregexpr("np\\.float64\\((\\d+\\.\\d+)\\)", target, perl = TRUE))[[1]])
-    return(data.frame("genes" = genes, "weight" = values))
-}
-
-names.col <- c('TF',
-'MotifID',
-'AUC',
-'NES', ### enrichment score
-'MotifSimilarityQvalue',# q < 0.05
-'OrthologousIdentity',
-'Annotation', # direct or indirect annotation
-'Context', # genomic context, promoter or enhancers
-'TargetGenes',
-'RankAtMax')
-
-reg <- readr::read_csv(paste0("./SCENIC/", name, "_reg.csv"), col_names = FALSE, skip = 1) %>% 
-    setNames(names.col) %>%
-    select(TF, TargetGenes,NES,MotifID, MotifSimilarityQvalue) %>% na.omit() 
-    # filter(MotifSimilarityQvalue < 0.05)
-
-##### read the regulon activity
-activity <- read_csv("./SCENIC/neuronal_auc_mtx.csv", ) 
-
 
 
 ################# pyScenic predict the regulatory relationship
@@ -91,6 +65,34 @@ ${ref_feather} \
 --expression_mtx_fname ./SCENIC/${name}-Copy1.loom \
 --output ./SCENIC/${name}_reg.gmt \
 --num_workers 3
+
+
+############################## read the results 
+split_genes <- function(target){ 
+    genes <- regmatches(target, gregexpr("(?<=')[A-Z0-9\\-]+(?:_[A-Z0-9]+)?(?=')", target, perl = TRUE))[[1]]
+    values  <- as.numeric(regmatches(target, gregexpr("np\\.float64\\((\\d+\\.\\d+)\\)", target, perl = TRUE))[[1]])
+    return(data.frame("genes" = genes, "weight" = values))
+}
+
+names.col <- c('TF',
+'MotifID',
+'AUC',
+'NES', ### enrichment score
+'MotifSimilarityQvalue',# q < 0.05
+'OrthologousIdentity',
+'Annotation', # direct or indirect annotation
+'Context', # genomic context, promoter or enhancers
+'TargetGenes',
+'RankAtMax')
+
+reg <- readr::read_csv(paste0("./SCENIC/", name, "_reg.csv"), col_names = FALSE, skip = 1) %>% 
+    setNames(names.col) %>%
+    select(TF, TargetGenes,NES,MotifID, MotifSimilarityQvalue) %>% na.omit() 
+    # filter(MotifSimilarityQvalue < 0.05)
+
+##### read the regulon activity
+activity <- read_csv("./SCENIC/neuronal_auc_mtx.csv", ) 
+
 
 ######################### heatmap to visualize the activity of the regulon
 auc <- read.csv(paste0("./SCENIC/", name, "_auc_mtx.csv"),
