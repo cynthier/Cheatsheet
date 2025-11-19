@@ -1,7 +1,11 @@
 
 getcolors <- function(){ 
 
+    
     colors = c(
+         "neuronal progenitor" = "#1f78b4", 
+    "neuroblast" = "#fb9a99",
+    "neurons" = "#ff7f00",
     "Doublet" = "#BE81F7",
     "Singlet" = "#aaaaaa",
         
